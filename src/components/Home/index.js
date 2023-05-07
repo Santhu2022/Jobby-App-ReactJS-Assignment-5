@@ -1,6 +1,14 @@
+import Header from '../Header'
+import './index.css'
+
 const Home = () => (
-  <div>
-    <h1>Home</h1>
+  <div className="home-container">
+    <Header />
+    <div className="home-page">
+      <div>
+        <h1 className="home-heading">Find The Job That Fits Your Life</h1>
+      </div>
+    </div>
   </div>
 )
 

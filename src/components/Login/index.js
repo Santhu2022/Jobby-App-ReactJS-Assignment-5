@@ -6,14 +6,14 @@ import './index.css'
 
 class Login extends Component {
   state = {
-    username: 'rahul',
+    username: '',
     password: '',
     errorMsg: '',
     showErrorMsg: false,
   }
 
   onSuccessLogin = jwtToken => {
-    Cookies.set('jwt_token', jwtToken)
+    Cookies.set('jwt_token', jwtToken, {expires: 30})
     const {history} = this.props
     history.replace('/')
   }
