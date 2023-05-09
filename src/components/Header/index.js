@@ -15,11 +15,13 @@ const Header = props => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
-          alt="website logo"
-          className="home-website-logo"
-        />
+        <Link to="/">
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
+            alt="website logo"
+            className="home-website-logo"
+          />
+        </Link>
         <ul className="nav-items">
           <li>
             <Link to="/" className="nav-link-lg">

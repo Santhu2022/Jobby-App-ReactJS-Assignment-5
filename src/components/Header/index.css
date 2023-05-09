@@ -63,8 +63,8 @@
   color: #ffffff;
 }
 @media screen and (max-width: 768px) {
-  .home-website-logo {
-    margin-right: auto;
+  .nav-items {
+    margin-left: auto;
   }
   .nav-link-lg {
     display: none;
