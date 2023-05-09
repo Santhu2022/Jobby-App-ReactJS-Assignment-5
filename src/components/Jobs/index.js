@@ -1,9 +1,11 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
-import Loader from 'react-loader-spinner'
+import {BsSearch} from 'react-icons/bs'
 
 import Header from '../Header'
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
+import ProfileDetails from '../ProfileDetails'
+import FiltersGroup from '../FiltersGroup'
+
 import './index.css'
 
 const apiStatusConstants = {
@@ -17,10 +19,59 @@ class Jobs extends Component {
   state = {
     profileDetails: {},
     profileApiStatus: apiStatusConstants.initial,
+    searchInput: '',
+    activeSalaryRangeId: '',
+    jobsList: [],
+    jobsApiStatus: apiStatusConstants.initial,
   }
 
   componentDidMount() {
     this.getProfileDetails()
+    this.getJobs()
+  }
+
+  updateSalaryRangeId = activeSalaryRangeId =>
+    this.setState({activeSalaryRangeId}, this.getJobs)
+
+  getJobs = async () => {
+    this.setState({jobsApiStatus: apiStatusConstants.inProgress})
+
+    const {activeSalaryRangeId} = this.state
+
+    const jwtToken = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=FULLTIME,PARTTIME&minimum_package=${activeSalaryRangeId}&search=`
+    console.log(apiUrl)
+
+    const options = {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      method: 'GET',
+    }
+    const response = await fetch(apiUrl, options)
+    const data = await response.json()
+    if (response.ok === true) {
+      const {jobs} = data
+      const updatedData = jobs.map(eachJob => ({
+        companyLogoUrl: eachJob.company_logo_url,
+        employmentType: eachJob.employment_type,
+        id: eachJob.id,
+        jobDescription: eachJob.job_description,
+        location: eachJob.location,
+        packagePerAnnum: eachJob.package_per_annum,
+        rating: eachJob.rating,
+        title: eachJob.title,
+      }))
+
+      updatedData.forEach(each => console.log(each.packagePerAnnum))
+
+      this.setState({
+        jobsList: updatedData,
+        jobsApiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({jobsApiStatus: apiStatusConstants.failure})
+    }
   }
 
   getProfileDetails = async () => {
@@ -54,56 +105,48 @@ class Jobs extends Component {
     }
   }
 
-  renderProfileLoader = () => (
-    <div className="loader-container-profile" data-testid="loader">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
-    </div>
-  )
-
-  renderProfileFailure = () => (
-    <div className="profile-failure-container">
-      <button
-        className="retry-button"
-        type="button"
-        onClick={this.getProfileDetails}
-      >
-        Retry
-      </button>
-    </div>
-  )
-
-  renderProfile = () => {
-    const {profileDetails} = this.state
-    const {name, profileImageUrl, shortBio} = profileDetails
-
+  renderSearchBar = searchBarID => {
+    const {searchInput} = this.state
     return (
-      <div className="profile-details-container">
-        <img src={profileImageUrl} alt="profile" className="profile-image" />
-        <h1 className="profile-name">{name}</h1>
-        <p className="profile-bio">{shortBio}</p>
+      <div className="search-bar" id={searchBarID}>
+        <input
+          className="search-input"
+          type="search"
+          placeholder="Search"
+          value={searchInput}
+          onChange={e => this.setState({searchInput: e.target.value})}
+        />
+        <button
+          className="search-button"
+          type="button"
+          data-testid="searchButton"
+        >
+          <BsSearch className="search-icon" />
+        </button>
       </div>
     )
   }
 
-  renderProfileDetails = () => {
-    const {profileApiStatus} = this.state
-    switch (profileApiStatus) {
-      case apiStatusConstants.inProgress:
-        return this.renderProfileLoader()
-      case apiStatusConstants.success:
-        return this.renderProfile()
-      case apiStatusConstants.failure:
-        return this.renderProfileFailure()
-      default:
-        return null
-    }
-  }
-
   render() {
+    const {profileDetails, profileApiStatus, activeSalaryRangeId} = this.state
     return (
       <div className="jobs-page-container">
         <Header />
-        <div className="jobs-page">{this.renderProfileDetails()}</div>
+        <div className="jobs-page">
+          <div className="side-bar">
+            {this.renderSearchBar('smallSearchBar')}
+            <ProfileDetails
+              profileDetails={profileDetails}
+              profileApiStatus={profileApiStatus}
+              getProfileDetails={this.getProfileDetails}
+            />
+            <hr className="separator" />
+            <FiltersGroup
+              updateSalaryRangeId={this.updateSalaryRangeId}
+              activeSalaryRangeId={activeSalaryRangeId}
+            />
+          </div>
+        </div>
       </div>
     )
   }
