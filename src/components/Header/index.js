@@ -39,6 +39,15 @@ const Header = props => {
               <BsFillBriefcaseFill className="small-header-icons" />
             </Link>
           </li>
+          <li className="logout-btn-list-item-small">
+            <button
+              type="button"
+              className="logout-button-sm"
+              onClick={onClickLogout}
+            >
+              <FiLogOut className="logout-icon-sm" />
+            </button>
+          </li>
         </ul>
         <button
           type="button"
@@ -46,13 +55,6 @@ const Header = props => {
           onClick={onClickLogout}
         >
           Logout
-        </button>
-        <button
-          type="button"
-          className="logout-button-sm"
-          onClick={onClickLogout}
-        >
-          <FiLogOut className="logout-icon-sm" />
         </button>
       </div>
     </nav>

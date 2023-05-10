@@ -65,7 +65,7 @@ const FiltersGroup = props => {
 
   const renderEmploymentTypes = () => (
     <>
-      <h1 className="filter-heading">Types of Employment</h1>
+      <h1 className="filter-heading">Type of Employment</h1>
       <ul className="filters-list">{renderEmploymentTypesList()}</ul>
     </>
   )

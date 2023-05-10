@@ -112,7 +112,8 @@
   justify-content: center;
   align-items: center;
 }
-.jobs-api-failure-container {
+.jobs-api-failure-container,
+.no-jobs-container {
   flex-grow: 1;
   /* border: 1px solid white; */
   display: flex;
@@ -125,23 +126,26 @@
   width: 80%;
   margin: auto;
 }
-.job-api-failure-image {
+.job-api-failure-image,
+.no-jobs-image {
   width: 100%;
   max-width: 350px;
 }
 
-.failure-view-heading {
+.failure-view-heading,
+.no-jobs-heading {
   margin: 0;
   color: #ffffff;
   font-family: 'Roboto';
   font-size: 22px;
-  font-weight: 500;  
+  font-weight: 500;
 }
-.failure-view-description {
+.failure-view-description,
+.no-jobs-description {
   margin: 0;
   color: #ffffff;
   font-family: 'Roboto';
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
   font-weight: 300;
 }
@@ -149,18 +153,18 @@
   .job-api-failure-image {
     max-width: 430px;
   }
-  .failure-view-heading{
-      font-size: 24px;
+  .failure-view-heading {
+    font-size: 24px;
   }
-  .failure-view-description{
-      font-size: 15px;
+  .failure-view-description {
+    font-size: 15px;
   }
 }
 @media screen and (min-width: 1200px) {
   .job-api-failure-image {
     max-width: 430px;
   }
-  .failure-view-heading{
-      font-size: 34px;
+  .failure-view-heading {
+    font-size: 34px;
   }
 }

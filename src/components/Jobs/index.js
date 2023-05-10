@@ -65,7 +65,7 @@ class Jobs extends Component {
 
     const options = {
       headers: {
-        // Authorization: `Bearer ${jwtToken}`,
+        Authorization: `Bearer ${jwtToken}`,
       },
       method: 'GET',
     }
@@ -83,17 +83,12 @@ class Jobs extends Component {
         rating: eachJob.rating,
         title: eachJob.title,
       }))
-
-      setTimeout(() => {
-        this.setState({
-          jobsList: updatedData,
-          jobsApiStatus: apiStatusConstants.success,
-        })
-      }, 1000)
+      this.setState({
+        jobsList: updatedData,
+        jobsApiStatus: apiStatusConstants.success,
+      })
     } else {
-      //   setTimeout(() => {
       this.setState({jobsApiStatus: apiStatusConstants.failure})
-      //   }, 1000)
     }
   }
 
@@ -135,9 +130,7 @@ class Jobs extends Component {
           type="search"
           placeholder="Search"
           value={searchInput}
-          onChange={e =>
-            this.setState({searchInput: e.target.value.toLowerCase()})
-          }
+          onChange={e => this.setState({searchInput: e.target.value})}
         />
         <button
           className="search-button"
@@ -177,6 +170,20 @@ class Jobs extends Component {
     )
   }
 
+  renderNoJobsView = () => (
+    <div className="no-jobs-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+        alt="no jobs"
+        className="no-jobs-image"
+      />
+      <h1 className="no-jobs-heading">No Jobs Found</h1>
+      <p className="no-jobs-description">
+        We could not find any jobs. Try other filters.
+      </p>
+    </div>
+  )
+
   renderJobsList = () => {
     const {jobsList} = this.state
     return (
@@ -188,7 +195,7 @@ class Jobs extends Component {
             ))}
           </ul>
         ) : (
-          <h1>No Jobs Found</h1>
+          this.renderNoJobsView()
         )}
       </>
     )

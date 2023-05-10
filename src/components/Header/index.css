@@ -9,6 +9,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  /* border: 1px solid white; */
 }
 .home-website-logo {
   width: 110px;
@@ -18,7 +20,9 @@
   list-style-type: none;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
+
+  /* border: 1px solid white; */
 }
 .nav-link-lg {
   text-decoration: none;
@@ -51,7 +55,7 @@
   outline: none;
 }
 .logout-button-sm {
-  margin-left: 25px;
+  margin-left: 5px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -91,7 +95,7 @@
     font-size: 16px;
     padding: 6px 24px;
   }
-  .logout-button-sm {
+  .logout-btn-list-item-small {
     display: none;
   }
 }

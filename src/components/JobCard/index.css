@@ -35,7 +35,7 @@
   /* border: 1px solid white; */
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 .star-icon-card {
   color: #fbbf24;
