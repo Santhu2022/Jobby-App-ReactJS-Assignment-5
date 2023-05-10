@@ -1,14 +1,14 @@
 .filters-group-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 30px;
 }
 .filter-heading {
   margin: 0;
   font-family: 'Roboto';
   color: #f8fafc;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 
@@ -20,15 +20,15 @@
   gap: 15px;
   margin: 0;
 }
-.fliters-list-item{
-    display: flex;
-    align-items: center;
+.fliters-list-item {
+  display: flex;
+  align-items: center;
 }
 
 .checkbox-input {
-  width: 16px;
-  height: 16px;
-
+  width: 14px;
+  height: 14px;
+  accent-color: #b6c5ff;
   cursor: pointer;
   outline: none;
 }
@@ -36,10 +36,10 @@
   font-family: 'Roboto';
   color: #f1f5f9;
   margin-left: 16px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
 }
 
-*{
-    /* border: 1px solid white; */
+* {
+  /* border: 1px solid white; */
 }

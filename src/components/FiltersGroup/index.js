@@ -40,19 +40,28 @@ const salaryRangesList = [
 ]
 
 const FiltersGroup = props => {
-  const renderEmploymentTypesList = () =>
-    employmentTypesList.map(eachType => (
-      <li className="fliters-list-item" key={eachType.employmentTypeId}>
-        <input
-          type="checkbox"
-          className="checkbox-input"
-          id={eachType.employmentTypeId}
-        />
-        <label htmlFor={eachType.employmentTypeId} className="filter-label">
-          {eachType.label}
-        </label>
-      </li>
-    ))
+  const renderEmploymentTypesList = () => {
+    const {updateEmploymentTypesChecked} = props
+
+    return employmentTypesList.map(eachType => {
+      const updateTypeslist = () =>
+        updateEmploymentTypesChecked(eachType.employmentTypeId)
+
+      return (
+        <li className="fliters-list-item" key={eachType.employmentTypeId}>
+          <input
+            type="checkbox"
+            className="checkbox-input"
+            id={eachType.employmentTypeId}
+            onChange={updateTypeslist}
+          />
+          <label htmlFor={eachType.employmentTypeId} className="filter-label">
+            {eachType.label}
+          </label>
+        </li>
+      )
+    })
+  }
 
   const renderEmploymentTypes = () => (
     <>
@@ -65,7 +74,7 @@ const FiltersGroup = props => {
     const {updateSalaryRangeId, activeSalaryRangeId} = props
 
     return salaryRangesList.map(eachRange => {
-      const onClickRange = () => updateSalaryRangeId(eachRange.salaryRangeId)
+      const onChangeRange = () => updateSalaryRangeId(eachRange.salaryRangeId)
 
       const isChecked = eachRange.salaryRangeId === activeSalaryRangeId
 
@@ -76,7 +85,7 @@ const FiltersGroup = props => {
             className="checkbox-input"
             id={eachRange.salaryRangeId}
             name="salary ranges"
-            onClick={onClickRange}
+            onChange={onChangeRange}
             checked={isChecked}
           />
           <label htmlFor={eachRange.salaryRangeId} className="filter-label">
