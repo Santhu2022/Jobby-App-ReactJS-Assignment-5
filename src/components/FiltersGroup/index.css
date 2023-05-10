@@ -28,7 +28,7 @@
 .checkbox-input {
   width: 14px;
   height: 14px;
-  accent-color: #b6c5ff;
+  /* accent-color: #b6c5ff; */
   cursor: pointer;
   outline: none;
 }

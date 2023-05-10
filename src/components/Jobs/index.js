@@ -1,12 +1,14 @@
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {BsSearch} from 'react-icons/bs'
+import Loader from 'react-loader-spinner'
 
 import Header from '../Header'
 import ProfileDetails from '../ProfileDetails'
 import FiltersGroup from '../FiltersGroup'
 import JobCard from '../JobCard'
 
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import './index.css'
 
 const apiStatusConstants = {
@@ -63,7 +65,7 @@ class Jobs extends Component {
 
     const options = {
       headers: {
-        Authorization: `Bearer ${jwtToken}`,
+        // Authorization: `Bearer ${jwtToken}`,
       },
       method: 'GET',
     }
@@ -82,12 +84,16 @@ class Jobs extends Component {
         title: eachJob.title,
       }))
 
-      this.setState({
-        jobsList: updatedData,
-        jobsApiStatus: apiStatusConstants.success,
-      })
+      setTimeout(() => {
+        this.setState({
+          jobsList: updatedData,
+          jobsApiStatus: apiStatusConstants.success,
+        })
+      }, 1000)
     } else {
+      //   setTimeout(() => {
       this.setState({jobsApiStatus: apiStatusConstants.failure})
+      //   }, 1000)
     }
   }
 
@@ -111,12 +117,10 @@ class Jobs extends Component {
         profileImageUrl: profileDetails.profile_image_url,
         shortBio: profileDetails.short_bio,
       }
-      setTimeout(() => {
-        this.setState({
-          profileDetails: updatedData,
-          profileApiStatus: apiStatusConstants.success,
-        })
-      }, 500)
+      this.setState({
+        profileDetails: updatedData,
+        profileApiStatus: apiStatusConstants.success,
+      })
     } else {
       this.setState({profileApiStatus: apiStatusConstants.failure})
     }
@@ -190,12 +194,43 @@ class Jobs extends Component {
     )
   }
 
+  renderJobsLoaderView = () => (
+    <div className="jobs-loader-container" data-testid="loader">
+      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+    </div>
+  )
+
+  renderJobsApiFailureView = () => (
+    <div className="jobs-api-failure-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+        alt="failure view"
+        className="job-api-failure-image"
+      />
+      <h1 className="failure-view-heading">Oops! Something Went Wrong</h1>
+      <p className="failure-view-description">
+        We cannot seem to find the page you are looking for.
+      </p>
+      <button
+        type="button"
+        className="retry-button"
+        onClick={() => this.getJobs()}
+      >
+        Retry
+      </button>
+    </div>
+  )
+
   renderJobsBasedOnAPiStatus = () => {
     const {jobsApiStatus} = this.state
 
     switch (jobsApiStatus) {
+      case apiStatusConstants.inProgress:
+        return this.renderJobsLoaderView()
       case apiStatusConstants.success:
         return this.renderJobsList()
+      case apiStatusConstants.failure:
+        return this.renderJobsApiFailureView()
       default:
         return null
     }
