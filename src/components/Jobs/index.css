@@ -84,6 +84,11 @@
   cursor: pointer;
   outline: none;
 }
+@media screen and (min-width: 768px) {
+  .search-input {
+    font-size: 16px;
+  }
+}
 .search-button {
   width: 15%;
   background-color: #272727;

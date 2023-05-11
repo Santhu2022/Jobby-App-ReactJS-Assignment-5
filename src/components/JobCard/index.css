@@ -1,15 +1,18 @@
 .job-card {
   background-color: #272727;
   border-radius: 15px;
+}
+@media screen and (min-width: 768px) {
+  .job-card {
+    width: 90%;
+  }
+}
+.job-card-link {
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   gap: 16px;
   padding: 12px;
-}
-@media screen and (min-width: 768px) {
-  .job-card {
-    width: 90%;        
-  }
 }
 .logo-title-container-card {
   /* border: 1px solid white; */
@@ -46,7 +49,7 @@
   margin: 0;
   color: #f8fafc;
   font-family: 'Roboto';
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
 }
 .location-package-container-card {
@@ -93,5 +96,5 @@
   color: #ffffff;
   font-weight: 300;
   font-size: 15px;
-  line-height: 1.33;
+  line-height: 1.4;
 }
