@@ -8,7 +8,6 @@ import JobItemDetails from './components/JobItemDetails'
 
 import './App.css'
 
-// Replace your code here
 const App = () => (
   <Switch>
     <Route exact path="/login" component={Login} />

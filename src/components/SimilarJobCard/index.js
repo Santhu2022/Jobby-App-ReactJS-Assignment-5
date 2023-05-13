@@ -1,7 +1,6 @@
 import {AiFillStar} from 'react-icons/ai'
 import {IoLocationSharp} from 'react-icons/io5'
 import {BsFillBriefcaseFill} from 'react-icons/bs'
-import {Link} from 'react-router-dom'
 import './index.css'
 
 const SimilarJobCard = props => {
@@ -13,7 +12,6 @@ const SimilarJobCard = props => {
     location,
     rating,
     title,
-    id,
   } = jobDetails
 
   return (
@@ -21,7 +19,7 @@ const SimilarJobCard = props => {
       <div className="logo-title-container-card">
         <img
           src={companyLogoUrl}
-          alt="company logo"
+          alt="similar job company logo"
           className="company-logo-card"
         />
         <div className="title-rating-container-card">
