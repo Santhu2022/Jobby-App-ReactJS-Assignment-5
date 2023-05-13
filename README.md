@@ -8,7 +8,7 @@ Implemented Jobby App where users can log in and can see a list of jobs with sea
 - Implemented filters and search text by sending them as query parameters to jobs API calls.
 - Redirecting to the login page if the user tries to open Home, Jobs, Job item details routes which need authentication by implementing protected Route.
 
-Technologies used: React JS, JS, CSS, Bootstrap, Routing, REST API Calls, Local Storage, JWT Token, Authorization, Authentication
+Technologies used: React JS, JS, CSS, Routing, REST API Calls, Local Storage, Cookies, JWT Token, Authorization, Authentication
 ### Refer to videos below:
 
 <div style="text-align: center;">
